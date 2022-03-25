@@ -25,3 +25,9 @@ Then /I should see all of the movies/ do
   # page.all("#movies tbody tr").size.should == Movie.all.size
   page.assert_selector('#movies tbody tr', count: Movie.all.size)
 end
+
+Then /I should see "(.*)" before "(.*)"$/ do |movie1, movie2|
+  pos_movie1 = page.body =~ /#{movie1}/
+  pos_movie2 = page.body =~ /#{movie2}/
+  assert pos_movie1 < pos_movie2 
+end
